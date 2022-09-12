@@ -1,11 +1,13 @@
 package com.example.clinicavet.controller;
 
+import com.example.clinicavet.dto.TutorRequest;
 import com.example.clinicavet.model.Tutor;
 import com.example.clinicavet.service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.util.annotation.Nullable;
 
 
 @RestController
@@ -16,8 +18,8 @@ public class TutorController {
     TutorService tutorService;
 
     @GetMapping("/listar")
-    public ResponseEntity<?> listar() {
-        return new ResponseEntity<>(tutorService.listar(), HttpStatus.OK);
+    public ResponseEntity<?> listar(@ModelAttribute(value = "tutorRequest") @Nullable TutorRequest tutorRequest) {
+        return new ResponseEntity<>(tutorService.listar(tutorRequest), HttpStatus.OK);
     }
 
     @GetMapping("/buscar/{id}")
