@@ -1,9 +1,11 @@
 package com.example.clinicavet.service;
 
+import com.example.clinicavet.dto.TutorRequest;
 import com.example.clinicavet.model.Tutor;
 import com.example.clinicavet.repository.TutorRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,14 @@ public class TutorService {
     @Autowired
     TutorRepository tutorRepository;
 
-    public List<Tutor> listar() {
-        return tutorRepository.findAll();
+    public List<Tutor> listar(TutorRequest tutorRequest) {
+
+        Tutor tutor = new Tutor();
+        tutor.setNome(tutorRequest.getNome());
+        tutor.setCpf(tutorRequest.getCpf());
+        tutor.setContato(tutorRequest.getContato());
+
+        return tutorRepository.findAll(Example.of(tutor));
     }
 
     public Tutor salvar(Tutor tutor) {
