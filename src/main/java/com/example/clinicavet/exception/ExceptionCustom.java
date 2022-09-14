@@ -1,12 +1,17 @@
 package com.example.clinicavet.exception;
 
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
 public final class ExceptionCustom extends Exception{
 
-    public static void check(boolean expression, String msg) {
+    public static void check(boolean expression, HttpStatus status, String msg) {
 
         if (expression) {
-            throw new RuntimeException(msg);
+            throw new ResponseStatusException(status, msg) {
+
+            };
         }
     }
 }
