@@ -6,6 +6,7 @@ import com.example.clinicavet.repository.TutorRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,20 +37,20 @@ public class TutorService {
 
     public void remover(Long id) {
         Optional<Tutor> tutor = buscar(id);
-        check(!tutor.isPresent(), "Tutor não encontrado, informe um id valido!");
+        check(!tutor.isPresent(), HttpStatus.NOT_FOUND,"Tutor não encontrado, informe um id valido!");
         tutorRepository.deleteById(id);
     }
 
     public Optional<Tutor> buscar(Long id) {
         Optional<Tutor> tutor = tutorRepository.findById(id);
-        check(!tutor.isPresent(), "Tutor não encontrado, informe um id valido!");
+        check(!tutor.isPresent(), HttpStatus.NOT_FOUND, "Tutor não encontrado, informe um id valido!");
         return tutor;
     }
 
     public Tutor alterar(Long id, Tutor newTutor){
         Optional<Tutor> oldTutor = tutorRepository.findById(id);
         Tutor tutor = oldTutor.get();
-        check(oldTutor.isPresent(), "Tutor não encontrado, informe um id valido!");
+        check(oldTutor.isPresent(), HttpStatus.NOT_FOUND,"Tutor não encontrado, informe um id valido!");
         BeanUtils.copyProperties(newTutor, tutor, "id");
         return tutorRepository.save(tutor);
     }
