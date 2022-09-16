@@ -50,7 +50,7 @@ public class TutorService {
     public Tutor alterar(Long id, Tutor newTutor){
         Optional<Tutor> oldTutor = tutorRepository.findById(id);
         Tutor tutor = oldTutor.get();
-        check(oldTutor.isPresent(), HttpStatus.NOT_FOUND,"Tutor não encontrado, informe um id valido!");
+        check(!oldTutor.isPresent(), HttpStatus.NOT_FOUND,"Tutor não encontrado, informe um id valido!");
         BeanUtils.copyProperties(newTutor, tutor, "id");
         return tutorRepository.save(tutor);
     }

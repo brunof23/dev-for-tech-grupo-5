@@ -4,13 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Tutor {
+public class Endereco {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,16 +21,9 @@ public class Tutor {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(nullable = false)
-    private String nome;
-
-    @Column(nullable = false, unique = true)
-    private String cpf;
-
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    private Endereco endereco;
-
-    @Column(nullable = false)
-    private String contato;
-
+    private String rua;
+    private int numero;
+    private String complemento;
+    private String bairro;
+    private String cidade;
 }
