@@ -23,10 +23,9 @@ public class Paciente {
     @ManyToOne
     @JoinColumn(name = "tutor_id")
     @JsonIgnoreProperties("paciente")
-    private Tutor tutor; //chave estrangeira
+    private Tutor tutor;
     private String raca;
     private String peso;
     private String idade;
-    private String procedimento; //chave estrangeira
 
 }
