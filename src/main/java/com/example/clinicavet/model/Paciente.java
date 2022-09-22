@@ -1,13 +1,12 @@
 package com.example.clinicavet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -21,7 +20,10 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nomePet;
-    private String tutor; //chave estrangeira
+    @ManyToOne
+    @JoinColumn(name = "tutor_id")
+    @JsonIgnoreProperties("paciente")
+    private Tutor tutor; //chave estrangeira
     private String raca;
     private String peso;
     private String idade;
