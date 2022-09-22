@@ -1,10 +1,12 @@
 package com.example.clinicavet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -24,7 +26,11 @@ public class Tutor {
     @Column(nullable = false, unique = true)
     private String cpf;
 
-    @ManyToOne(cascade=CascadeType.PERSIST)
+    @OneToMany(mappedBy = "tutor", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tutor")
+    private List<Paciente> pacientes;
+
+    @ManyToOne(cascade=CascadeType.ALL)
     private Endereco endereco;
 
     @Column(nullable = false)
