@@ -1,5 +1,6 @@
 package com.example.clinicavet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +20,19 @@ public class Agendamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //	private Long id_tutor;<chave_estrangeira>
-//	private Long id_pet; <chave_estrangeira>
-//	private Long id_procedimento; <chave_estrangeira>
+
+    @ManyToOne
+    @JoinColumn(name = "tutor_id")
+    private Tutor tutor;
+
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    private Paciente paciente;
+
+    @ManyToOne
+    @JsonIgnoreProperties("procedimento_id")
+    private Procedimento procedimento;
+
     private LocalDate data;
     private LocalDate hora;
 
