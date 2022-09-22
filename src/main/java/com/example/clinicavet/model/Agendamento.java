@@ -23,14 +23,17 @@ public class Agendamento {
 
     @ManyToOne
     @JoinColumn(name = "tutor_id")
+    @JsonIgnoreProperties("agendamento")
     private Tutor tutor;
 
     @ManyToOne
     @JoinColumn(name = "paciente_id")
+    @JsonIgnoreProperties("agendamento")
     private Paciente paciente;
 
     @ManyToOne
-    @JsonIgnoreProperties("procedimento_id")
+    @JoinColumn(name = "procedimento_id")
+    @JsonIgnoreProperties("agendamento")
     private Procedimento procedimento;
 
     private LocalDate data;
